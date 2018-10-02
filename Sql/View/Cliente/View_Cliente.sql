@@ -1,0 +1,20 @@
+﻿create or replace view vw_cliente as
+select c.id     					"Código"
+     , c.nome   					"Cliente"
+     , c.cpf    					"CPF"
+     , c.rg     					"RG"
+     , c.data_nascimento			"Data de Nascimento"
+     , c.residencial 				"Residencial"
+     , c.comercial					"Comercial"
+     , c.celular   					"Celular"
+     , c.recado						"Recado"
+     , c.email						"E-mail"
+     , c.rua						"Rua"
+     , c.numero						"Número"
+     , c.bairro						"Bairro"
+     , c.cidade						"Cidade"
+     , c.uf							"UF"
+     , c.complemento				"Complemento"
+     , c.ponto_referencia			"Ponto de Referencia"
+from cliente c
+order by c.id;    

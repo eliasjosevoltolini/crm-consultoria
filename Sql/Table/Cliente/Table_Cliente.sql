@@ -1,0 +1,21 @@
+﻿CREATE TABLE `cliente` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(60) NOT NULL,
+  `cpf` varchar(30) NOT NULL,
+  `rg` varchar(30) NOT NULL,
+  `data_nascimento` date NOT NULL,
+  `residencial` varchar(20) DEFAULT NULL,
+  `comercial` varchar(20) DEFAULT NULL,
+  `celular` varchar(60) DEFAULT NULL,
+  `recado` varchar(60) DEFAULT NULL,
+  `email` varchar(60) DEFAULT NULL,
+  `rua` varchar(60) NOT NULL,
+  `numero` varchar(10) NOT NULL,
+  `bairro` varchar(60) NOT NULL,
+  `cidade` varchar(60) NOT NULL,
+  `uf` varchar(3) NOT NULL,
+  `complemento` varchar(80) NOT NULL,
+  `ponto_referencia` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_nome_cpf_data_nascimento` (`nome`,`cpf`,`data_nascimento`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
