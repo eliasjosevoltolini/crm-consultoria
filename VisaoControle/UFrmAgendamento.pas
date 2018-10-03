@@ -120,6 +120,17 @@ type
     piMarcar: TMenuItem;
     piDesmarcar: TMenuItem;
     sgConsultaResultado: TStringGrid;
+    Informaes1: TMenuItem;
+    pnInformacoes: TPanel;
+    gbInformacoes: TGroupBox;
+    lbConsultor: TLabel;
+    lbCliente: TLabel;
+    lbData: TLabel;
+    lbHorario: TLabel;
+    lbDuracao: TLabel;
+    lbObservacao: TLabel;
+    btnFechar: TButton;
+    lbTermino: TLabel;
     procedure btnNovoClick(Sender: TObject);
     procedure cbCadastroDuracaoExit(Sender: TObject);
     procedure pcAgendamentoChange(Sender: TObject);
@@ -136,6 +147,8 @@ type
     procedure piMarcarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure Informaes1Click(Sender: TObject);
+    procedure btnFecharClick(Sender: TObject);
   private
     FAGENDAMENTO          : TAGENDAMENTO;
     FRegraCRUDAgendamento : TRegraCRUDAgendamento;
@@ -336,7 +349,14 @@ end;
 procedure TFrmAgendamento.btnGravarClick(Sender: TObject);
 begin
   inherited;
+  try
   LimpaCamposCadastro;
+  except
+  on E: Exception do
+    begin
+      TDialogo.Excecao(E);
+    end;
+  end;
 end;
 
 procedure TFrmAgendamento.btnLimparClick(Sender: TObject);
@@ -344,12 +364,24 @@ begin
   inherited;
   LimpaCamposCadastro;
   LimparCabecalhoResultadoConsulta;
+
+  btnGravar.Enabled:= True;
+  lbGravar.Enabled :=True;
 end;
 
 procedure TFrmAgendamento.btnNovoClick(Sender: TObject);
 begin
   inherited;
   PosicionaCursorPrimeiroCampo;
+
+  btnGravar.Enabled:= True;
+  lbGravar.Enabled :=True;
+end;
+
+procedure TFrmAgendamento.btnFecharClick(Sender: TObject);
+begin
+  inherited;
+  pnInformacoes.Visible:= False;
 end;
 
 procedure TFrmAgendamento.CabecalhoResultadoConsulta(DataInicio: TDate;
@@ -517,7 +549,8 @@ begin
 
   Consultor       := TCONSULTOR(cbConsultaConsultor.Items.Objects[cbConsultaConsultor.ItemIndex]).NOME;
   ID              := TCONSULTOR(cbConsultaConsultor.Items.Objects[cbConsultaConsultor.ItemIndex]).ID;
-  DataInicial     := dtConsultaDataIniciol.Date;
+  //DataInicial   := dtConsultaDataIniciol.Date;
+  DataInicial     := IncDay(dtConsultaDataIniciol.Date, -1);
   QtdDias         := StrToIntDef(cbConsultaPeriodoDias.Items[cbConsultaPeriodoDias.ItemIndex], 0);
   AgendaConsultor := FRegraCRUDAgendamento.RetornaAgendamentosConsultor(Consultor, ID, DataInicial, QtdDias);
 
@@ -619,6 +652,19 @@ begin
             sgConsultaResultado.Cells[Indice+1, Linha]  := loAGENDAMENTO.NOME_CLIENTE;
             sgConsultaResultado.Objects[Indice+1, Linha]:= loAGENDAMENTO;
 
+            if loAGENDAMENTO.DURACAO = StrToTime('00:30') then
+            begin
+              sgConsultaResultado.Objects[Indice+1, Linha+1]:= loAGENDAMENTO;
+
+            end;
+
+            if loAGENDAMENTO.DURACAO = StrToTime('01:00') then
+            begin
+              sgConsultaResultado.Objects[Indice+1, Linha+1]:= loAGENDAMENTO;
+              sgConsultaResultado.Objects[Indice+1, Linha+2]:= loAGENDAMENTO;
+              sgConsultaResultado.Objects[Indice+1, Linha+3]:= loAGENDAMENTO;
+
+            end;
             break;
           end;
         end;
@@ -656,6 +702,11 @@ procedure TFrmAgendamento.FormShow(Sender: TObject);
 begin
   inherited;
   LimparCabecalhoResultadoConsulta;
+
+  pnInformacoes.Visible:= False;
+
+  pnInformacoes.Left := (Self.Width  - pnInformacoes.Width) div 2;
+  pnInformacoes.Top  := (Self.Height - pnInformacoes.Height) div 2;
 end;
 
 procedure TFrmAgendamento.HabilitaCampos(
@@ -666,6 +717,52 @@ begin
   begin
     tbCadastrar.Enabled := FTipoOperacaoUsuario In [touInsercao, touAtualizacao];
   end;
+end;
+
+procedure TFrmAgendamento.Informaes1Click(Sender: TObject);
+ const
+  CNT_LINHA_ZERO  = 0;
+  CNT_COLUNA_ZERO = 0;
+
+  STR_CONSULTOR = 'Consultor: ';
+  STR_CLIENTE   = 'Cliente: ';
+  STR_DATA      = 'Data: ';
+  STR_HORARIO   = 'Horário: ';
+  STR_DURACAO   = 'Duração: ';
+  STR_TERMINO   = 'Termino: ';
+  STR_OBSERVACAO= 'Observação: ';
+var
+  loAGENDAMENTO: TAGENDAMENTO;
+begin
+ try
+   with sgConsultaResultado do
+   begin
+     if Objects[Col, Row] <> nil then
+     begin
+      loAGENDAMENTO        := TAGENDAMENTO(Objects[Col, Row]);
+
+      lbConsultor.Caption  := STR_CONSULTOR + loAGENDAMENTO.NOME_CONSULTOR;
+      lbCliente.Caption    := STR_CLIENTE   + loAGENDAMENTO.NOME_CLIENTE;
+
+      lbData.Caption       := STR_DATA    + RetornaData(loAGENDAMENTO.DATA_INICIO);
+      lbHorario.Caption    := STR_HORARIO + RetornaTempo(loAGENDAMENTO.HORARIO_INICIO);
+      lbDuracao.Caption    := STR_DURACAO + RetornaTempo(loAGENDAMENTO.DURACAO);
+      lbTermino.Caption    := STR_TERMINO + RetornaTempo(loAGENDAMENTO.HORARIO_TERMINO);
+
+      lbObservacao.Caption := STR_OBSERVACAO + loAGENDAMENTO.OBSERVACAO;
+
+      FreeAndNil(loAGENDAMENTO);
+
+      pnInformacoes.Visible:= True;
+     end;
+   end;
+ except
+   on E: Exception do
+   begin
+     FreeAndNil(loAGENDAMENTO);
+     TDialogo.Excecao(E);
+   end;
+ end;
 end;
 
 procedure TFrmAgendamento.Inicializa;

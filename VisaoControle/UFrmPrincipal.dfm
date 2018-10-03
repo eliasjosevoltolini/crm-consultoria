@@ -3753,7 +3753,7 @@ object FrmPrincipal: TFrmPrincipal
       Left = 0
       Top = 0
       Width = 233
-      Height = 57
+      Height = 32
       Align = alTop
       Alignment = taCenter
       Caption = 'Acesso R'#225'pido'
@@ -3763,6 +3763,7 @@ object FrmPrincipal: TFrmPrincipal
       Font.Name = 'Segoe UI Semibold'
       Font.Style = [fsBold]
       ParentFont = False
+      ExplicitWidth = 157
     end
     object btnSair: TSpeedButton
       Left = 0
@@ -3788,7 +3789,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object btnAgendamentoCadastrar: TSpeedButton
       Left = 0
-      Top = 57
+      Top = 32
       Width = 233
       Height = 60
       Cursor = crHandPoint
@@ -3807,7 +3808,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object btnAgendamentoConsultar: TSpeedButton
       Left = 0
-      Top = 117
+      Top = 92
       Width = 233
       Height = 60
       Cursor = crHandPoint
@@ -3827,7 +3828,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object btnClienteCadastro: TSpeedButton
       Left = 0
-      Top = 177
+      Top = 152
       Width = 233
       Height = 60
       Cursor = crHandPoint
@@ -3847,7 +3848,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object btnConfiguracaoSistema: TSpeedButton
       Left = 0
-      Top = 297
+      Top = 272
       Width = 233
       Height = 60
       Cursor = crHandPoint
@@ -3869,7 +3870,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object btnConsultorCadastro: TSpeedButton
       Left = 0
-      Top = 237
+      Top = 212
       Width = 233
       Height = 60
       Cursor = crHandPoint

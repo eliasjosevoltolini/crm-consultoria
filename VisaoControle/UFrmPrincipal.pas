@@ -89,6 +89,7 @@ uses
 resourcestring
   STR_BANCO_DADOS    = 'Banco de Dados: ';
   STR_USUARIO_LOGADO = 'Usuário: ';
+  STR_DATA           = 'Data: ';
 
 {$R *.dfm}
 
@@ -244,6 +245,8 @@ procedure TFrmPrincipal.FormShow(Sender: TObject);
 begin
   sbPrincipal.Panels[0].Text := STR_BANCO_DADOS
                               + dmEntra21.SQLConnection.Params.Values[CNT_DATA_BASE];
+
+  sbPrincipal.Panels[2].Text := STR_DATA + DateToStr(Now);
   AtualizaUsuarioLogado;
 
   ImLogoQuery.Left := (Self.Width - ImLogoQuery.Width) div 2;

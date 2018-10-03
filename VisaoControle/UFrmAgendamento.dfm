@@ -2,6 +2,7 @@ inherited FrmAgendamento: TFrmAgendamento
   Caption = 'CRM Agendamento'
   ClientHeight = 742
   ClientWidth = 1209
+  ExplicitTop = 7
   ExplicitWidth = 1225
   ExplicitHeight = 780
   PixelsPerInch = 96
@@ -111,6 +112,9 @@ inherited FrmAgendamento: TFrmAgendamento
         Color = 15395562
         ParentBackground = False
         TabOrder = 0
+        DesignSize = (
+          1201
+          556)
         object sbConsultar: TScrollBox
           Left = 1
           Top = 1
@@ -342,6 +346,146 @@ inherited FrmAgendamento: TFrmAgendamento
               24
               24
               24)
+          end
+        end
+        object pnInformacoes: TPanel
+          Left = 427
+          Top = 13
+          Width = 422
+          Height = 260
+          Anchors = []
+          BevelInner = bvLowered
+          Color = 15066597
+          ParentBackground = False
+          TabOrder = 1
+          DesignSize = (
+            422
+            260)
+          object gbInformacoes: TGroupBox
+            Left = 2
+            Top = 2
+            Width = 418
+            Height = 224
+            Align = alTop
+            Caption = ' Informa'#231#245'es '
+            Color = 14737632
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Lucida Sans'
+            Font.Style = []
+            ParentBackground = False
+            ParentColor = False
+            ParentFont = False
+            TabOrder = 0
+            object lbConsultor: TLabel
+              Left = 19
+              Top = 26
+              Width = 62
+              Height = 17
+              Caption = 'Consultor:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbCliente: TLabel
+              Left = 36
+              Top = 49
+              Width = 44
+              Height = 17
+              Caption = 'Cliente:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbData: TLabel
+              Left = 48
+              Top = 72
+              Width = 31
+              Height = 17
+              Caption = 'Data:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbHorario: TLabel
+              Left = 30
+              Top = 95
+              Width = 49
+              Height = 17
+              Caption = 'Horario:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbDuracao: TLabel
+              Left = 26
+              Top = 118
+              Width = 53
+              Height = 17
+              Caption = 'Dura'#231#227'o:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbObservacao: TLabel
+              Left = 7
+              Top = 165
+              Width = 74
+              Height = 17
+              Caption = 'Observa'#231#227'o:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object lbTermino: TLabel
+              Left = 26
+              Top = 142
+              Width = 53
+              Height = 17
+              Caption = 'Termino:'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -13
+              Font.Name = 'Segoe UI Semibold'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+          end
+          object btnFechar: TButton
+            Left = 344
+            Top = 235
+            Width = 75
+            Height = 25
+            Anchors = [akRight, akBottom]
+            Caption = 'Fechar'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = btnFecharClick
+            ExplicitTop = 192
           end
         end
       end
@@ -851,12 +995,12 @@ inherited FrmAgendamento: TFrmAgendamento
     end
   end
   inherited pmOpcoes: TPopupMenu
-    Left = 760
-    Top = 120
+    Left = 720
+    Top = 48
   end
   object ppAgendamento: TPopupMenu
-    Left = 832
-    Top = 120
+    Left = 768
+    Top = 48
     object piMarcar: TMenuItem
       Caption = 'Marcar'
       OnClick = piMarcarClick
@@ -864,6 +1008,10 @@ inherited FrmAgendamento: TFrmAgendamento
     object piDesmarcar: TMenuItem
       Caption = 'Desmarcar'
       OnClick = piDesmarcarClick
+    end
+    object Informaes1: TMenuItem
+      Caption = 'Informa'#231#245'es'
+      OnClick = Informaes1Click
     end
   end
 end
